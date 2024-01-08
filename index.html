@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adapt AI Chat</title>
+</head>
+<body>
+    <h1>Adapt AI Chat</h1>
+
+    <label for="userInput">Enter your text:</label>
+    <input type="text" id="userInput">
+    <button onclick="getUserInput()">Submit</button>
+
+    <div id="aiResponse"></div>
+
+    <script>
+        async function getUserInput() {
+            const userInput = document.getElementById('userInput').value;
+
+            // Make a request to the API URL with user input
+            const apiUrl = `https://adaptai.ohheygfx.workers.dev?q=${encodeURIComponent(userInput)}`;
+            const response = await fetch(apiUrl);
+            const data = await response.json();
+
+            // Extract the AI response from the API data
+            const aiResponse = data[0]?.response?.response || 'No AI response';
+
+            // Display the AI response on the webpage
+            document.getElementById('aiResponse').innerText = aiResponse;
+        }
+    </script>
+</body>
+</html>
